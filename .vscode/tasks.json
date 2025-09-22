@@ -1,0 +1,143 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Captain Hook: Install",
+            "type": "shell",
+            "command": "${workspaceFolder}/tools/code-quality/captainhook/captainhook.phar",
+            "args": [
+                "install",
+                "--configuration=${workspaceFolder}/tools/code-quality/captainhook/config.json"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Captain Hook: Run Pre-Commit",
+            "type": "shell",
+            "command": "${workspaceFolder}/tools/code-quality/captainhook/captainhook.phar",
+            "args": [
+                "hook:pre-commit",
+                "--configuration=${workspaceFolder}/tools/code-quality/captainhook/config.json"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Captain Hook: Run Commit-Msg",
+            "type": "shell",
+            "command": "${workspaceFolder}/tools/code-quality/captainhook/captainhook.phar",
+            "args": [
+                "hook:commit-msg",
+                "--configuration=${workspaceFolder}/tools/code-quality/captainhook/config.json"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Captain Hook: Config Info",
+            "type": "shell",
+            "command": "${workspaceFolder}/tools/code-quality/captainhook/captainhook.phar",
+            "args": [
+                "config:info",
+                "--configuration=${workspaceFolder}/tools/code-quality/captainhook/config.json"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "PHPCS: Check Staged Files",
+            "type": "shell",
+            "command": "${workspaceFolder}/vendor/bin/phpcs",
+            "args": [
+                "-q",
+                "--standard=Magento2",
+                "-s",
+                "${file}"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "PHPStan: Analyze",
+            "type": "shell",
+            "command": "${workspaceFolder}/vendor/bin/phpstan",
+            "args": [
+                "analyze",
+                "-c",
+                "${workspaceFolder}/dev/tests/static/testsuite/Magento/Test/Php/_files/phpstan/phpstan.neon",
+                "-l",
+                "1",
+                "${file}"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Parallel Lint: Check PHP Syntax",
+            "type": "shell",
+            "command": "${workspaceFolder}/tools/code-quality/parallel-lint.phar",
+            "args": [
+                "${file}"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "clear": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

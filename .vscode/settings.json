@@ -1,0 +1,233 @@
+{
+    // ---- Editor basics
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.fixAll.eslint": "explicit"
+    },
+
+    // ---- Emmet & PHTML (treat .phtml like HTML/PHP)
+    "emmet.includeLanguages": {
+        "php": "html",
+        "blade": "html",
+        "phtml": "html",
+        "html": "html"
+    },
+    "files.associations": {
+        "*.phtml": "php",
+        "*.less": "less",
+        "*.xml": "xml",
+        "*.module": "php",
+        "*.install": "php"
+    },
+
+    // ---- PHP Intelephense (fast, smart PHP indexing)
+    "intelephense.environment.phpVersion": "8.2",
+    "intelephense.files.maxMemory": 8192,
+    "intelephense.telemetry.enabled": false,
+    "intelephense.stubs": [
+        "apache",
+        "bcmath",
+        "bz2",
+        "calendar",
+        "Core",
+        "curl",
+        "date",
+        "dom",
+        "fileinfo",
+        "filter",
+        "gd",
+        "gettext",
+        "hash",
+        "iconv",
+        "intl",
+        "json",
+        "libxml",
+        "mbstring",
+        "mcrypt",
+        "mysqli",
+        "openssl",
+        "pcntl",
+        "pcre",
+        "PDO",
+        "pdo_mysql",
+        "phar",
+        "posix",
+        "readline",
+        "session",
+        "SimpleXML",
+        "soap",
+        "sockets",
+        "sodium",
+        "SPL",
+        "standard",
+        "tokenizer",
+        "xml",
+        "xmlreader",
+        "xmlwriter",
+        "zip",
+        "zlib"
+    ],
+
+    // ---- PHPCS (Magento2 standard)
+    "phpcs.enable": true,
+    "phpcs.standard": "./vendor/magento/magento-coding-standard/Magento2",
+    "phpcs.executablePath": "./vendor/bin/phpcs",
+    "phpcs.ignorePatterns": [
+        "vendor/**",
+        "generated/**",
+        "pub/static/**",
+        "node_modules/**",
+        "var/**"
+    ],
+
+    // Optional: auto-fix with PHPCBF on save (where safe)
+    "phpcbf.enable": true,
+    "phpcbf.standard": "./vendor/magento/magento-coding-standard/Magento2",
+    "phpcbf.executablePath": "./vendor/bin/phpcbf",
+
+    // ---- ESLint for adminhtml/Hyvä JS
+    "eslint.workingDirectories": [{ "mode": "auto" }],
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "vue",
+        "json",
+        "jsonc"
+    ],
+
+    // ---- Stylelint for LESS (Magento 2 standards)
+    // See: https://developer.adobe.com/commerce/php/coding-standards/less/
+    "stylelint.enable": true,
+    "stylelint.validate": ["css", "less", "scss"],
+    "stylelint.packageManager": "npm",
+    "stylelint.snippet": ["css", "less", "scss"],
+    "stylelint.configFile": ".stylelintrc.json",
+
+    // ---- LESS/CSS Formatting (Magento 2 standards)
+    "[less]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.stylelint": "always"
+        },
+        "editor.tabSize": 4
+    },
+    "[css]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.stylelint": "always"
+        },
+        "editor.tabSize": 4
+    },
+    "[scss]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.stylelint": "always"
+        },
+        "editor.tabSize": 4
+    },
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+
+    // ---- Prettier Configuration
+    "prettier.configPath": ".prettierrc.json",
+    "prettier.useEditorConfig": true,
+
+    // ---- JavaScript/TypeScript Formatting
+    "[javascript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "always"
+        }
+    },
+    "[javascriptreact]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "always"
+        }
+    },
+    "[typescript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "always"
+        }
+    },
+    "[typescriptreact]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "always"
+        }
+    },
+    "[json]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    // ---- PHP/PHTML Formatting
+    "[php]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "wongjn.php-sniffer",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "always"
+        }
+    },
+    "[phtml]": {
+        "editor.formatOnSave": false,
+        "editor.tabSize": 4
+    },
+
+    // ---- XML (layout, di, routes)
+    "xml.format.splitAttributes": "splitNewLine",
+    "xml.format.joinContentLines": false,
+
+    // ---- Xdebug
+    "php.debug.ideKey": "VSCODE",
+    "php.validate.enable": false,
+
+    // ---- Search hygiene
+    "search.exclude": {
+        "**/vendor": true,
+        "**/node_modules": true,
+        "**/var": true,
+        "**/pub/static": true,
+        "**/generated": true
+    },
+    "files.watcherExclude": {
+        "**/vendor/**": true,
+        "**/node_modules/**": true,
+        "**/var/**": true,
+        "**/pub/static/**": true,
+        "**/generated/**": true
+    },
+
+    // ---- Captain Hook Integration
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.postCommitCommand": "none",
+
+    // ---- Task Runner for Captain Hook Commands
+    "task.autoDetect": "on",
+
+    // ---- Terminal Integration for Git Hooks
+    "terminal.integrated.env.linux": {
+        "GIT_HOOKS_PATH": "${workspaceFolder}/.git/hooks"
+    }
+}
+

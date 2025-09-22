@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "bmewburn.vscode-intelephense-client",
+        "ikappas.phpcs",
+        "wongjn.php-sniffer",
+        "neilbrayfield.php-docblocker",
+        "dbaeumer.vscode-eslint",
+        "stylelint.vscode-stylelint",
+        "esbenp.prettier-vscode",
+        "redhat.vscode-xml",
+        "editorconfig.editorconfig",
+        "eamodio.gitlens",
+        "mhutchie.git-graph"
+    ],
+    "unwantedRecommendations": []
+}
