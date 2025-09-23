@@ -1,0 +1,64 @@
+{
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": false,
+    "printWidth": 120,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "endOfLine": "lf",
+    "overrides": [
+        {
+            "files": "*.less",
+            "options": {
+                "parser": "less",
+                "tabWidth": 4,
+                "printWidth": 120
+            }
+        },
+        {
+            "files": "*.css",
+            "options": {
+                "parser": "css",
+                "tabWidth": 4,
+                "printWidth": 120
+            }
+        },
+        {
+            "files": "*.scss",
+            "options": {
+                "parser": "scss",
+                "tabWidth": 4,
+                "printWidth": 120
+            }
+        },
+        {
+            "files": ["*.js", "*.jsx"],
+            "options": {
+                "tabWidth": 4,
+                "singleQuote": true
+            }
+        },
+        {
+            "files": ["*.json", "*.jsonc"],
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.php",
+            "options": {
+                "tabWidth": 4,
+                "phpVersion": "8.2"
+            }
+        },
+        {
+            "files": "*.phtml",
+            "options": {
+                "parser": "php",
+                "tabWidth": 4
+            }
+        }
+    ]
+}
