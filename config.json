@@ -1,0 +1,270 @@
+{
+  "commit-msg": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Regex",
+        "config": {
+          "label": "Git commit message format validation..."
+        },
+        "options": {
+          "regex": "#CU-[A-z\\d]*:.*#",
+          "error": "!Commit message format wrong! Example: 'CU-2h2h2h: <message>' or refer to the regex: %s",
+          "success": "The commit message matched required regexp!"
+        }
+      },
+      {
+        "action": "\\CaptainHook\\App\\Hook\\Branch\\Action\\EnsureNaming",
+        "config": {
+          "label": "Git branch format validation ..."
+        },
+        "options": {
+          "regex": "#(hotfix|bugfix|feature)\\/CU-[A-z\\d].*-.*#",
+          "error": "!Branch format wrong! Example: 'feature/CU-s4j4j4-short-description' or refer to the regex: %s",
+          "success": "Branch matches required format. Thanks!"
+        }
+      }
+    ]
+  },
+  "pre-commit": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "\\CaptainHook\\App\\Hook\\Composer\\Action\\CheckLockFile",
+        "config": {
+          "label": "Composer lock file validation..."
+        },
+        "options": []
+      },
+      {
+        "action": "./tools/code-quality/parallel-lint.phar {$STAGED_FILES|in-dir:composer/packages/envalo}",
+        "config": {
+          "label": "PHP Linting for Envalo packages..."
+        },
+        "conditions": [
+          {
+            "exec": "or",
+            "args": [
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["php"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["phtml"]
+              }
+            ]
+          },
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory",
+            "args": ["composer/packages/envalo"]
+          }
+        ]
+      },
+      {
+        "action": "./tools/code-quality/parallel-lint.phar {$STAGED_FILES|in-dir:app/design/frontend/Svp}",
+        "config": {
+          "label": "PHP Linting for theme files..."
+        },
+        "conditions": [
+          {
+            "exec": "or",
+            "args": [
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["php"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["phtml"]
+              }
+            ]
+          },
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory",
+            "args": ["app/design/frontend/Svp"]
+          }
+        ]
+      },
+      {
+        "action": "git diff --name-only --staged| grep composer.json|xargs -n1 ./tools/code-quality/composer-normalize.phar --dry-run",
+        "config": {
+          "label": "Validate composer.json files for packages..."
+        },
+        "conditions": [
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory",
+            "args": ["composer/packages/envalo"]
+          },
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+            "args": ["json"]
+          }
+        ]
+      },
+      {
+        "action": "rm -rf /tmp/phpstan && ./vendor/bin/phpstan analyze -c dev/tests/static/testsuite/Magento/Test/Php/_files/phpstan/phpstan.neon -l 1 {$STAGED_FILES|of-type:php|separated-by: |in-directory:composer/packages/envalo}",
+        "config": {
+          "label": "PHPStan analysis for Envalo packages..."
+        },
+        "conditions": [
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+            "args": ["php"]
+          },
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory",
+            "args": ["composer/packages/envalo"]
+          }
+        ]
+      },
+      {
+        "action": "./vendor/bin/phpcs -q --standard=Magento2 -s {$STAGED_FILES|in-dir:composer/packages/envalo}",
+        "config": {
+          "label": "PHPCS for Envalo packages..."
+        },
+        "conditions": [
+          {
+            "exec": "or",
+            "args": [
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["php"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["phtml"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["js"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["html"]
+              }
+            ]
+          },
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory",
+            "args": ["composer/packages/envalo"]
+          }
+        ]
+      },
+      {
+        "action": "./vendor/bin/phpcs -q --standard=Magento2 -s {$STAGED_FILES|in-dir:app/design/frontend/Svp}",
+        "config": {
+          "label": "PHPCS for theme files..."
+        },
+        "conditions": [
+          {
+            "exec": "or",
+            "args": [
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["php"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["phtml"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["js"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["html"]
+              }
+            ]
+          },
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory",
+            "args": ["app/design/frontend/Svp"]
+          }
+        ]
+      },
+      {
+        "action": "./vendor/bin/phpcs -q --standard=Magento2 -s {$STAGED_FILES|in-dir:app/code}",
+        "config": {
+          "label": "PHPCS for app/code modules..."
+        },
+        "conditions": [
+          {
+            "exec": "or",
+            "args": [
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["php"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["phtml"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["js"]
+              },
+              {
+                "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                "args": ["html"]
+              }
+            ]
+          },
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory",
+            "args": ["app/code"]
+          }
+        ]
+      },
+      {
+        "action": "npx stylelint {$STAGED_FILES|of-type:less|separated-by: }",
+        "config": {
+          "label": "Stylelint for LESS files..."
+        },
+        "conditions": [
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+            "args": ["less"]
+          }
+        ]
+      },
+      {
+        "action": "npx stylelint {$STAGED_FILES|of-type:css|separated-by: }",
+        "config": {
+          "label": "Stylelint for CSS files..."
+        },
+        "conditions": [
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+            "args": ["css"]
+          },
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory\\Not",
+            "args": ["vendor"]
+          },
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory\\Not",
+            "args": ["node_modules"]
+          },
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory\\Not",
+            "args": ["pub"]
+          }
+        ]
+      }
+    ]
+  },
+  "pre-push": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-commit": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-merge": {
+    "enabled": false,
+    "actions": []
+  }
+}

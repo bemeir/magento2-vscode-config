@@ -86,10 +86,12 @@
         "var/**"
     ],
 
-    // Optional: auto-fix with PHPCBF on save (where safe)
+    // Auto-fix with PHPCBF on save
     "phpcbf.enable": true,
     "phpcbf.standard": "./vendor/magento/magento-coding-standard/Magento2",
     "phpcbf.executablePath": "./vendor/bin/phpcbf",
+    "phpcbf.onsave": true,
+    "phpcbf.documentFormattingProvider": true,
 
     // ---- ESLint for adminhtml/Hyvä JS
     "eslint.workingDirectories": [{ "mode": "auto" }],
@@ -186,7 +188,11 @@
         "editor.defaultFormatter": "wongjn.php-sniffer",
         "editor.codeActionsOnSave": {
             "source.fixAll": "always"
-        }
+        },
+        "editor.rulers": [120],
+        "editor.wordWrapColumn": 120,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true
     },
     "[phtml]": {
         "editor.formatOnSave": false,
