@@ -1,0 +1,6 @@
+# Other common exclusions
+vendor/
+node_modules/
+pub/
+var/
+generated/

@@ -10,7 +10,8 @@
         "redhat.vscode-xml",
         "editorconfig.editorconfig",
         "eamodio.gitlens",
-        "mhutchie.git-graph"
+        "mhutchie.git-graph",
+        "emeraldwalk.RunOnSave"
     ],
     "unwantedRecommendations": []
 }

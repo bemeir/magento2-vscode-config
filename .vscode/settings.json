@@ -110,14 +110,12 @@
     "stylelint.packageManager": "npm",
     "stylelint.snippet": ["css", "less", "scss"],
     "stylelint.configFile": ".stylelintrc.json",
+    "stylelint.stylelintPath": "node_modules/stylelint",
 
     // ---- LESS/CSS Formatting (Magento 2 standards)
     "[less]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.codeActionsOnSave": {
-            "source.fixAll.stylelint": "always"
-        },
         "editor.tabSize": 4
     },
     "[css]": {
@@ -143,6 +141,7 @@
     // ---- Prettier Configuration
     "prettier.configPath": ".prettierrc.json",
     "prettier.useEditorConfig": true,
+    "prettier.singleQuote": true,
 
     // ---- JavaScript/TypeScript Formatting
     "[javascript]": {
@@ -234,6 +233,16 @@
     // ---- Terminal Integration for Git Hooks
     "terminal.integrated.env.linux": {
         "GIT_HOOKS_PATH": "${workspaceFolder}/.git/hooks"
+    },
+
+    // ---- Fix LESS decimals after Prettier formats (requires emeraldwalk.RunOnSave extension)
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.less$",
+                "cmd": "sed -i 's/: 0\\.\\([0-9]\\)/: .\\1/g; s/ 0\\.\\([0-9]\\)/ .\\1/g; s/(0\\.\\([0-9]\\)/(.\\1/g; s/, 0\\.\\([0-9]\\)/, .\\1/g' ${file}"
+            }
+        ]
     }
 }
 
