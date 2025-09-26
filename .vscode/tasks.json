@@ -80,13 +80,7 @@
         {
             "label": "PHPCS: Check Staged Files",
             "type": "shell",
-            "command": "${workspaceFolder}/vendor/bin/phpcs",
-            "args": [
-                "-q",
-                "--standard=Magento2",
-                "-s",
-                "${file}"
-            ],
+            "command": "${workspaceFolder}/.vscode/check-staged-phpcs.sh",
             "group": {
                 "kind": "test",
                 "isDefault": false

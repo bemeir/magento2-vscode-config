@@ -103,35 +103,24 @@
         "jsonc"
     ],
 
-    // ---- Stylelint for LESS (Magento 2 standards)
-    // See: https://developer.adobe.com/commerce/php/coding-standards/less/
-    "stylelint.enable": true,
-    "stylelint.validate": ["css", "less", "scss"],
-    "stylelint.packageManager": "npm",
-    "stylelint.snippet": ["css", "less", "scss"],
-    "stylelint.configFile": ".stylelintrc.json",
-    "stylelint.stylelintPath": "node_modules/stylelint",
-
     // ---- LESS/CSS Formatting (Magento 2 standards)
     "[less]": {
         "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file",
         "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {},
         "editor.tabSize": 4
     },
     "[css]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.codeActionsOnSave": {
-            "source.fixAll.stylelint": "always"
-        },
+        "editor.codeActionsOnSave": {},
         "editor.tabSize": 4
     },
     "[scss]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.codeActionsOnSave": {
-            "source.fixAll.stylelint": "always"
-        },
+        "editor.codeActionsOnSave": {},
         "editor.tabSize": 4
     },
     "css.validate": false,
@@ -235,12 +224,13 @@
         "GIT_HOOKS_PATH": "${workspaceFolder}/.git/hooks"
     },
 
-    // ---- Fix LESS decimals after Prettier formats (requires emeraldwalk.RunOnSave extension)
+    // ---- Fix LESS decimals and vendor prefix sorting after Prettier (requires emeraldwalk.RunOnSave extension)
     "emeraldwalk.runonsave": {
         "commands": [
             {
                 "match": "\\.less$",
-                "cmd": "sed -i 's/: 0\\.\\([0-9]\\)/: .\\1/g; s/ 0\\.\\([0-9]\\)/ .\\1/g; s/(0\\.\\([0-9]\\)/(.\\1/g; s/, 0\\.\\([0-9]\\)/, .\\1/g' ${file}"
+                "cmd": "${workspaceFolder}/.vscode/fix-less.sh ${file}",
+                "isAsync": true
             }
         ]
     }
